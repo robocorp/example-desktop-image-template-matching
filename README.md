@@ -1,4 +1,4 @@
-# Cross-platform desktop automation using image template matching and keyboard shortcuts
+# Travel directions desktop automation robot on macOS
 
 > In image template-based [desktop automation](https://robocorp.com/docs/development-guide/desktop), you provide the robot with screenshots of the parts of the interface that it needs to interact with, like a button or input field. The images are saved together with your automation code. The robot will compare the image to what is currently displayed on the screen and find its target.
 
