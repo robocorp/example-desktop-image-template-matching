@@ -18,6 +18,12 @@ The robot:
 
 > **Note:** This robot requires **macOS Big Sur**. The layout and the behavior of the Maps app vary between macOS releases. macOS will ask for permissions the first time you run the robot. Go to `System Preferences` -> `Security & Privacy` and check either `Robocorp Lab` or `Code` (depending on the IDE you are using) in the `Accessibility` and `Screen Recording` sections.
 
+Another important topic:
+
+> System settings can impact the recognition of the images: How the interface elements look on a screen depends on system settings like color schemes, transparency, and system fonts. Images taken on a system might end up looking different than the target system, and the robot might not recognize them, stopping the process.
+
+In this case, macOS should use the "Dark" appearance under `System Preferences` -> `General`. See our [Desktop automation](https://robocorp.com/docs/development-guide/desktop) page for more information.
+
 ### The settings
 
 ```robot
