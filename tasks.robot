@@ -84,5 +84,4 @@ Find travel directions between two random locations
     @{locations}=    Get random locations
     Open the Maps app
     Maximize the window
-    #View directions    ${locations}[0]    ${locations}[1]
-    View directions    Helsinki    Tuusula
+    View directions    ${locations}[0]    ${locations}[1]

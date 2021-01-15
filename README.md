@@ -22,15 +22,19 @@ The robot:
 
 ```robot
 *** Settings ***
-Library         Process
-Library         RPA.Browser
-Library         RPA.Desktop
-Task Teardown   Close All Browsers
+Documentation     Finds travel directions between two random locations.
+...               Selects two random locations on Earth.
+...               Finds the directions using the Maps app on macOS (Big Sur).
+...               Falls back on Google Maps, if Maps fails to find directions.
+Library           Process
+Library           RPA.Browser
+Library           RPA.Desktop
+Task Teardown     Close All Browsers
 ```
 
 The robot uses three [libraries](https://robocorp.com/docs/languages-and-frameworks/robot-framework/basics#what-are-libraries) to automate the task. Finally, it will close all the browsers it happened to open.
 
-### The task
+### The task: Find travel directions between two random locations
 
 ```robot
 *** Tasks ***
@@ -39,6 +43,14 @@ Find travel directions between two random locations
     Open the Maps app
     Maximize the window
     View directions    ${locations}[0]    ${locations}[1]
+```
+
+### Variables
+
+```robot
+*** Variables ***
+${RANDOM_LOCATION_WEBSITE}=    https://www.randomlists.com/random-location
+${DIRECTIONS_SCREENSHOT}=    ${CURDIR}${/}output${/}directions.png
 ```
 
 ### Keyword: Get random locations
@@ -115,10 +127,10 @@ The robot sets the directions view in the Maps app to a known starting state (em
 ```robot
 *** Keywords ***
 View directions using Google Maps
-    [Arguments]    ${location_1}   ${location_2}
+    [Arguments]    ${location_1}    ${location_2}
     Go To    https://www.google.com/maps/dir/${location_1}/${location_2}/
     Wait Until Element Is Visible    css:.section-directions-options
-    Screenshot
+    Screenshot    filename=${DIRECTIONS_SCREENSHOT}
 ```
 
 The robot waits until Google Maps has loaded the directions and takes a full web page screenshot.
@@ -141,7 +153,7 @@ The robot needs to input the from and to locations. This keyword provides a gene
 ```robot
 *** Keywords ***
 View directions
-    [Arguments]    ${location_1}   ${location_2}
+    [Arguments]    ${location_1}    ${location_2}
     Open and reset the directions view
     Enter location    alias:Maps.FromLocation    ${location_1}
     Enter location    alias:Maps.ToLocation    ${location_2}
@@ -150,10 +162,10 @@ View directions
     ...    Wait For Element    alias:Maps.RouteIcon    timeout=20.0
     Run Keyword Unless
     ...    ${directions_found}
-    ...    View directions using Google Maps    ${location_1}   ${location_2}
+    ...    View directions using Google Maps    ${location_1}    ${location_2}
     Run Keyword If
     ...    ${directions_found}
-    ...    Take Screenshot    ${CURDIR}${/}output${/}directions.png
+    ...    Take Screenshot    ${DIRECTIONS_SCREENSHOT}
 ```
 
 The robot tries to find the directions using the Maps app. If that fails, the robot gets the directions from Google Maps.
