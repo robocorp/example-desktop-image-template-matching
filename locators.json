@@ -1,0 +1,44 @@
+{
+    "Desktop.WindowControls": {
+        "confidence": 80.0,
+        "path": ".images/desktop-windowcontrols-path.png",
+        "source": ".images/desktop-windowcontrols-source.png",
+        "type": "image"
+    },
+    "Maps.FromLocation": {
+        "confidence": 80.0,
+        "path": ".images/maps-fromlocation-path.png",
+        "source": ".images/maps-fromlocation-source.png",
+        "type": "image"
+    },
+    "Maps.MapMode": {
+        "confidence": 80.0,
+        "path": ".images/maps-mapmode-path.png",
+        "source": ".images/maps-mapmode-source.png",
+        "type": "image"
+    },
+    "Maps.ResetFromAndToLocationsIcon": {
+        "confidence": 80.0,
+        "path": ".images/maps-resetfromandtolocationsicon-path.png",
+        "source": ".images/maps-resetfromandtolocationsicon-source.png",
+        "type": "image"
+    },
+    "Maps.RouteIcon": {
+        "confidence": 80.0,
+        "path": ".images/maps-routeicon-path.png",
+        "source": ".images/maps-routeicon-source.png",
+        "type": "image"
+    },
+    "Maps.SwapLocations": {
+        "confidence": 80.0,
+        "path": ".images/maps-swaplocations-path.png",
+        "source": ".images/maps-swaplocations-source.png",
+        "type": "image"
+    },
+    "Maps.ToLocation": {
+        "confidence": 80.0,
+        "path": ".images/maps-tolocation-path.png",
+        "source": ".images/maps-tolocation-source.png",
+        "type": "image"
+    }
+}
