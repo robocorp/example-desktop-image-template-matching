@@ -4,7 +4,7 @@ Documentation     Finds travel directions between two random locations.
 ...               Finds the directions using the Maps app on macOS (Big Sur).
 ...               Falls back on Google Maps, if Maps fails to find directions.
 Library           Process
-Library           RPA.Browser
+Library           RPA.Browser.Selenium
 Library           RPA.Desktop
 Task Teardown     Close All Browsers
 
