@@ -128,6 +128,14 @@ The robot sets the directions view in the Maps app to a known starting state (em
 - Image templates are used to wait for specific app states so that the robot knows when something has been completed.
 - Keyboard shortcuts are used to toggle the directions view.
 
+### Keyword: Accept Google consent
+
+```robot
+*** Keywords ***
+Accept Google consent
+    Click Button When Visible    xpath://form//button
+```
+
 ### Keyword: View directions using Google Maps
 
 ```robot
@@ -135,6 +143,7 @@ The robot sets the directions view in the Maps app to a known starting state (em
 View directions using Google Maps
     [Arguments]    ${location_1}    ${location_2}
     Go To    https://www.google.com/maps/dir/${location_1}/${location_2}/
+    Accept Google consent
     Wait Until Element Is Visible    css:.section-directions-options
     Screenshot    filename=${DIRECTIONS_SCREENSHOT}
 ```
