@@ -50,9 +50,14 @@ Open and reset the directions view
     Wait For Element    alias:Maps.SwapLocations
 
 *** Keywords ***
+Accept Google consent
+    Click Button When Visible    xpath://form//button
+
+*** Keywords ***
 View directions using Google Maps
     [Arguments]    ${location_1}    ${location_2}
     Go To    https://www.google.com/maps/dir/${location_1}/${location_2}/
+    Accept Google consent
     Wait Until Element Is Visible    css:.section-directions-options
     Screenshot    filename=${DIRECTIONS_SCREENSHOT}
 
