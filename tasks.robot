@@ -58,7 +58,7 @@ View directions using Google Maps
     [Arguments]    ${location_1}    ${location_2}
     Go To    https://www.google.com/maps/dir/${location_1}/${location_2}/
     Accept Google consent
-    Wait Until Element Is Visible    css:.section-directions-options
+    Wait Until Element Is Visible    css:.section-directions-trip-title
     Screenshot    filename=${DIRECTIONS_SCREENSHOT}
 
 *** Keywords ***
