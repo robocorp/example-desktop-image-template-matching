@@ -24,7 +24,7 @@ Get random locations
 *** Keywords ***
 Open the Maps app
     Run Process    open    -a    Maps
-    Wait For Element    alias:Maps.MapMode
+    Wait For Element    alias:Maps.MapMode    timeout=10
 
 *** Keywords ***
 Maximize the window
