@@ -31,9 +31,9 @@ Maximize the window
     ${not_maximized}=
     ...    Run Keyword And Return Status
     ...    Find Element    alias:Desktop.WindowControls
-    Run Keyword If
-    ...    ${not_maximized}
-    ...    RPA.Desktop.Press Keys    ctrl    cmd    f
+    IF    ${not_maximized}
+        RPA.Desktop.Press Keys    ctrl    cmd    f
+    END
     Wait For Element    not alias:Desktop.WindowControls
 
 *** Keywords ***
@@ -41,9 +41,9 @@ Open and reset the directions view
     ${directions_open}=
     ...    Run Keyword And Return Status
     ...    Find Element    alias:Maps.SwapLocations
-    Run Keyword Unless
-    ...    ${directions_open}
-    ...    RPA.Desktop.Press Keys    cmd    r
+    IF    not ${directions_open}
+        RPA.Desktop.Press Keys    cmd    r
+    END
     Wait For Element    alias:Maps.SwapLocations
     Click    alias:Maps.ResetFromAndToLocationsIcon
     RPA.Desktop.Press Keys    cmd    r
@@ -77,12 +77,11 @@ View directions
     ${directions_found}=
     ...    Run Keyword And Return Status
     ...    Wait For Element    alias:Maps.RouteIcon    timeout=20.0
-    Run Keyword Unless
-    ...    ${directions_found}
-    ...    View directions using Google Maps    ${location_1}    ${location_2}
-    Run Keyword If
-    ...    ${directions_found}
-    ...    Take Screenshot    ${DIRECTIONS_SCREENSHOT}
+    IF    ${directions_found}
+        Take Screenshot    ${DIRECTIONS_SCREENSHOT}
+    ELSE
+        View directions using Google Maps    ${location_1}    ${location_2}
+    END
 
 *** Tasks ***
 Find travel directions between two random locations
