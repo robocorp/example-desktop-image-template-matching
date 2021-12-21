@@ -5,5 +5,5 @@ dependencies:
   - python=3.7.5
   - pip=20.1
   - pip:
-      - rpaframework==11.6.3
-      - rpaframework-recognition==0.7.2
+      - rpaframework==12.2.0
+      - rpaframework-recognition==1.0.0
