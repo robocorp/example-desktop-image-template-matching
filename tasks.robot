@@ -1,16 +1,28 @@
 *** Settings ***
-Documentation     Finds travel directions between two random locations.
-...               Selects two random locations on Earth.
-...               Finds the directions using the Maps app on macOS (Big Sur).
-...               Falls back on Google Maps, if Maps fails to find directions.
-Library           Process
-Library           RPA.Browser.Selenium
-Library           RPA.Desktop
-Task Teardown     Close All Browsers
+Documentation       Finds travel directions between two random locations.
+...                 Selects two random locations on Earth.
+...                 Finds the directions using the Maps app on macOS (Big Sur).
+...                 Falls back on Google Maps, if Maps fails to find directions.
+
+Library             Process
+Library             RPA.Browser.Selenium
+Library             RPA.Desktop
+
+Task Teardown       Close All Browsers
+
 
 *** Variables ***
-${RANDOM_LOCATION_WEBSITE}=    https://www.randomlists.com/random-location
-${DIRECTIONS_SCREENSHOT}=    ${CURDIR}${/}output${/}directions.png
+${RANDOM_LOCATION_WEBSITE}=     https://www.randomlists.com/random-location
+${DIRECTIONS_SCREENSHOT}=       ${CURDIR}${/}output${/}directions.png
+
+
+*** Tasks ***
+Find travel directions between two random locations
+    @{locations}=    Get random locations
+    Open the Maps app
+    Maximize the window
+    View directions    ${locations}[0]    ${locations}[1]
+
 
 *** Keywords ***
 Get random locations
@@ -19,41 +31,34 @@ Get random locations
     @{location_elements}=    Get WebElements    css:.rand_medium
     ${location_1}=    Get Text    ${location_elements}[0]
     ${location_2}=    Get Text    ${location_elements}[1]
-    [Return]    ${location_1}    ${location_2}
+    RETURN    ${location_1}    ${location_2}
 
-*** Keywords ***
 Open the Maps app
     Run Process    open    -a    Maps
     Wait For Element    alias:Maps.MapMode    timeout=10
 
-*** Keywords ***
 Maximize the window
     ${not_maximized}=
     ...    Run Keyword And Return Status
     ...    Find Element    alias:Desktop.WindowControls
-    IF    ${not_maximized}
-        RPA.Desktop.Press Keys    ctrl    cmd    f
-    END
+    IF    ${not_maximized}    RPA.Desktop.Press Keys    ctrl    cmd    f
     Wait For Element    not alias:Desktop.WindowControls
 
-*** Keywords ***
 Open and reset the directions view
     ${directions_open}=
     ...    Run Keyword And Return Status
     ...    Find Element    alias:Maps.SwapLocations
-    IF    not ${directions_open}
-        RPA.Desktop.Press Keys    cmd    r
-    END
+    IF    not ${directions_open}    RPA.Desktop.Press Keys    cmd    r
     Wait For Element    alias:Maps.SwapLocations
     Click    alias:Maps.ResetFromAndToLocationsIcon
     RPA.Desktop.Press Keys    cmd    r
     Wait For Element    alias:Maps.SwapLocations
 
-*** Keywords ***
 Accept Google consent
-    Click Button When Visible    xpath://form//button
+    Run Keyword And Ignore Error
+    ...    Click Button When Visible
+    ...    xpath://form//button
 
-*** Keywords ***
 View directions using Google Maps
     [Arguments]    ${location_1}    ${location_2}
     Go To    https://www.google.com/maps/dir/${location_1}/${location_2}/
@@ -61,14 +66,12 @@ View directions using Google Maps
     Wait Until Element Is Visible    id:section-directions-trip-0
     Screenshot    filename=${DIRECTIONS_SCREENSHOT}
 
-*** Keywords ***
 Enter location
     [Arguments]    ${locator}    ${location}
     Wait For Element    ${locator}
     Click    ${locator}
     Type Text    ${location}    enter=True
 
-*** Keywords ***
 View directions
     [Arguments]    ${location_1}    ${location_2}
     Open and reset the directions view
@@ -82,10 +85,3 @@ View directions
     ELSE
         View directions using Google Maps    ${location_1}    ${location_2}
     END
-
-*** Tasks ***
-Find travel directions between two random locations
-    @{locations}=    Get random locations
-    Open the Maps app
-    Maximize the window
-    View directions    ${locations}[0]    ${locations}[1]
