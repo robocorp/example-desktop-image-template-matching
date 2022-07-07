@@ -13,7 +13,7 @@ This example robot demonstrates the use of image templates and keyboard shortcut
 The robot:
 
 - Interacts with a web browser to select two random locations on Earth (from https://www.randomlists.com/random-location).
-- Tries to find the directions using the Maps desktop app on macOS (Big Sur), using image templates and keyboard shortcuts.
+- Tries to find the directions using the Maps desktop app on macOS (Monterey), using image templates and keyboard shortcuts.
 - Falls back on the web version of Google Maps if Maps fails to find directions.
 
 > **Note:** This robot requires **macOS Monterey**. (Tested on version 12.4.) The layout and the behavior of the Maps app vary between macOS releases. macOS will ask for permissions the first time you run the robot. Go to `System Preferences` -> `Security & Privacy` and check `Robocorp Lab`, `Code`, `VS Code` or `Terminal` (depending on where you run the robot from) in the `Accessibility` and `Screen Recording` sections.
