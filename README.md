@@ -16,7 +16,7 @@ The robot:
 - Tries to find the directions using the Maps desktop app on macOS (Big Sur), using image templates and keyboard shortcuts.
 - Falls back on the web version of Google Maps if Maps fails to find directions.
 
-> **Note:** This robot requires **macOS Big Sur**. The layout and the behavior of the Maps app vary between macOS releases. macOS will ask for permissions the first time you run the robot. Go to `System Preferences` -> `Security & Privacy` and check `Robocorp Lab`, `Code`, or `Terminal` (depending on where you run the robot from) in the `Accessibility` and `Screen Recording` sections.
+> **Note:** This robot requires **macOS Monterey**. (Tested on version 12.4.) The layout and the behavior of the Maps app vary between macOS releases. macOS will ask for permissions the first time you run the robot. Go to `System Preferences` -> `Security & Privacy` and check `Robocorp Lab`, `Code`, `VS Code` or `Terminal` (depending on where you run the robot from) in the `Accessibility` and `Screen Recording` sections.
 
 Another important topic:
 
